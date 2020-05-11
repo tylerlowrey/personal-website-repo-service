@@ -27,7 +27,6 @@ public class RepoController
     @GetMapping
     public Flux<RepoResponse> getAllRepos()
     {
-        return repoService.getReposAsync(USER_TO_RETRIEVE_REPOS_FROM)
-                          .flatMapMany(Flux::fromIterable);
+        return repoService.getReposAsync(USER_TO_RETRIEVE_REPOS_FROM);
     }
 }

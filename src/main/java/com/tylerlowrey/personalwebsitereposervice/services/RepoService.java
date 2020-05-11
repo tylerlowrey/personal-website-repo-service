@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
+import reactor.core.publisher.Flux;
 
 import java.util.List;
 
@@ -19,14 +19,14 @@ public class RepoService
 
     private final WebClient webClient = WebClient.create(BASE_API_URL);
 
-    public Mono<List<RepoResponse>> getReposAsync(String username)
+    public Flux<RepoResponse> getReposAsync(String username)
     {
         String path = "/user/repos?sort=update&type=all";
         return webClient.get()
-                 .uri(path, username)
-                 .header("Authorization", "token " + apiKey)
-                 .retrieve()
-                 .bodyToMono(new ParameterizedTypeReference<>() {});
+                        .uri(path, username)
+                        .header("Authorization", "token " + apiKey)
+                        .retrieve()
+                        .bodyToFlux(RepoResponse.class);
     }
 
 
