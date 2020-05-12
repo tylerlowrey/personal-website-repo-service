@@ -3,7 +3,6 @@ package com.tylerlowrey.personalwebsitereposervice.controllers;
 import com.tylerlowrey.personalwebsitereposervice.models.RepoResponse;
 import com.tylerlowrey.personalwebsitereposervice.services.RepoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +29,6 @@ public class RepoController
             return repoService.getReposAsync();
         }
 
-        return repoService.getUsersNonForkedRepos();
+        return repoService.getNonForkedRepos();
     }
 }

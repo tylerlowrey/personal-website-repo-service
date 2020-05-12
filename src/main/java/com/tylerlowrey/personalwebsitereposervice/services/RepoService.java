@@ -29,9 +29,19 @@ public class RepoService
                         .bodyToFlux(RepoResponse.class);
     }
 
-    public Flux<RepoResponse> getUsersNonForkedRepos()
+    public Flux<RepoResponse> getNonForkedRepos()
     {
         return getReposAsync().filter(repoResponse -> !repoResponse.isFork());
+    }
+
+    public Flux<RepoResponse> getUsersOwnedReposAsync(String username)
+    {
+        String path = "/users/{username}/repos?type=owner";
+        return webClient.get()
+                        .uri(path, username)
+                        .header("Authorization", "token " + apiKey)
+                        .retrieve()
+                        .bodyToFlux(RepoResponse.class);
     }
 
 
