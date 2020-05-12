@@ -17,9 +17,11 @@ public class RepoResponse
     private String fullName;
     @JsonProperty("private")
     private boolean isPrivate;
+    private RepoOwner owner;
     @JsonProperty("html_url")
     private String htmlUrl;
     private String description;
+    private String language;
     @JsonProperty("fork")
     private boolean isFork;
     private String url;

@@ -3,14 +3,12 @@ package com.tylerlowrey.personalwebsitereposervice.controllers;
 import com.tylerlowrey.personalwebsitereposervice.models.RepoResponse;
 import com.tylerlowrey.personalwebsitereposervice.services.RepoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 
 @RestController
 @RequestMapping("/repos")
+@CrossOrigin(origins = "*")
 public class RepoController
 {
     private final RepoService repoService;
