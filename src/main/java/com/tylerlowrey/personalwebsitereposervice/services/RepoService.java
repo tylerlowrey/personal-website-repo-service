@@ -19,14 +19,19 @@ public class RepoService
 
     private final WebClient webClient = WebClient.create(BASE_API_URL);
 
-    public Flux<RepoResponse> getReposAsync(String username)
+    public Flux<RepoResponse> getReposAsync()
     {
         String path = "/user/repos?sort=update&type=all";
         return webClient.get()
-                        .uri(path, username)
+                        .uri(path)
                         .header("Authorization", "token " + apiKey)
                         .retrieve()
                         .bodyToFlux(RepoResponse.class);
+    }
+
+    public Flux<RepoResponse> getUsersNonForkedRepos()
+    {
+        return getReposAsync().filter(repoResponse -> !repoResponse.isFork());
     }
 
 

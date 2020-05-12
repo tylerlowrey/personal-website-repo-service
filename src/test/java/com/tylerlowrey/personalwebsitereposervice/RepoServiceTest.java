@@ -18,8 +18,7 @@ public class RepoServiceTest
     @Test
     public void reposListIsNotEmpty()
     {
-        StepVerifier.create(repoService.getReposAsync("tylerlowrey"))
-                    .expectNextMatches(repoList -> !repoList.isEmpty())
-                    .verifyComplete();
+        StepVerifier.create(repoService.getUsersReposAsync("tylerlowrey"))
+                    .expectNext();
     }
 }

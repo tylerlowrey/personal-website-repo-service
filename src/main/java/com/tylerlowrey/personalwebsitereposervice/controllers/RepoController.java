@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
@@ -13,10 +14,7 @@ import reactor.core.publisher.Flux;
 @RequestMapping("/repos")
 public class RepoController
 {
-    @Value("{repos.user}")
-    private String USER_TO_RETRIEVE_REPOS_FROM;
-
-    private RepoService repoService;
+    private final RepoService repoService;
 
     @Autowired
     public RepoController(RepoService repoService)
@@ -25,8 +23,13 @@ public class RepoController
     }
 
     @GetMapping
-    public Flux<RepoResponse> getAllRepos()
+    public Flux<RepoResponse> getAllRepos(@RequestParam(required = false, defaultValue = "false") boolean showForked)
     {
-        return repoService.getReposAsync(USER_TO_RETRIEVE_REPOS_FROM);
+        if(showForked)
+        {
+            return repoService.getReposAsync();
+        }
+
+        return repoService.getUsersNonForkedRepos();
     }
 }

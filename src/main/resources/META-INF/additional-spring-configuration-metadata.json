@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "repos.user",
+      "type": "java.lang.String",
+      "description": "The github username of the user to retrieve repo information for."
+  }
+] }
